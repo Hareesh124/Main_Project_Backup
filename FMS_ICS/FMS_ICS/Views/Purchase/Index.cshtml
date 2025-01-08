@@ -1,0 +1,101 @@
+﻿@model IEnumerable<FMS_ICS.Models.Purchase>
+
+@*@{
+    ViewBag.Title = "Purchases";
+}*@
+<br />
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-primary">Purchases</h2><br />
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
+    </div>
+    <br /><br />
+    <table class="table table-striped table-hover">
+        <thead style="background: linear-gradient(90deg, #77aded, #d6bb29); color: white;">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.User.FullName)</th>
+                <th>@Html.DisplayNameFor(model => model.Product.ProductName)</th>
+                <th>@Html.DisplayNameFor(model => model.PurchaseDate)</th>
+                <th>@Html.DisplayNameFor(model => model.TotalAmount)</th>
+                <th>@Html.DisplayNameFor(model => model.TenureMonths)</th>
+                <th>@Html.DisplayNameFor(model => model.MonthlyEMI)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.User.FullName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Product.ProductName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PurchaseDate)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TotalAmount)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TenureMonths)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MonthlyEMI)</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            @Html.ActionLink("Edit", "Edit", new { id = item.PurchaseID }, new { @class = "btn btn-warning btn-sm" })
+                            @Html.ActionLink("Details", "Details", new { id = item.PurchaseID }, new { @class = "btn btn-info btn-sm" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+        font-weight: bold;
+        color: #77aded;
+    }
+
+    .table {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .btn-group .btn {
+        margin-right: 5px;
+    }
+
+    .btn:last-child {
+        margin-right: 0;
+    }
+
+    .btn-success {
+        background-color: #77aded;
+        border-color: #77aded;
+    }
+
+        .btn-success:hover {
+            background-color: #5c93b2;
+            border-color: #5c93b2;
+        }
+
+    .btn-warning {
+        background-color: #d6bb29;
+        border-color: #d6bb29;
+    }
+
+        .btn-warning:hover {
+            background-color: #b29722;
+            border-color: #b29722;
+        }
+
+    .btn-info {
+        background-color: #77aded;
+        border-color: #77aded;
+    }
+
+        .btn-info:hover {
+            background-color: #5c93b2;
+            border-color: #5c93b2;
+        }
+</style>

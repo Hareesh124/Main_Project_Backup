@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<!-- User Login Form -->
+<h3>User Login</h3>
+@using (Html.BeginForm("UserLogin", "Login", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+    </div>
+    <button type="submit">Login</button>
+}
+
+<hr />
+
+<!-- Admin Login Form -->
+<h3>Admin Login</h3>
+@using (Html.BeginForm("AdminLogin", "Login", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+    </div>
+    <button type="submit">Login</button>
+}
+@*@if (ViewData.ModelState[""]?.Errors?.Any() == true)
+{
+    <div style="color: red;">
+        @ViewData.ModelState[""].Errors.FirstOrDefault()?.ErrorMessage
+    </div>
+}*@
+

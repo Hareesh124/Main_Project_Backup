@@ -1,0 +1,38 @@
+﻿@model FMS_ICS.Models.Purchase
+
+@{
+    ViewBag.Title = "Purchase Details";
+}
+
+<h2 style="color: #77aded; font-weight: bold;">Purchase Details</h2>
+
+<div style="background: linear-gradient(90deg, #77aded, #d6bb29); padding: 20px; border-radius: 10px;">
+    <dl class="dl-horizontal" style="color: #333; font-weight: bold;">
+        <dt style="color: #d6bb29;">@Html.DisplayNameFor(model => model.User.FullName)</dt>
+        <dd>@Html.DisplayFor(model => model.User.FullName)</dd>
+
+        <dt style="color: #d6bb29;">@Html.DisplayNameFor(model => model.Product.ProductName)</dt>
+        <dd>@Html.DisplayFor(model => model.Product.ProductName)</dd>
+
+        <dt style="color: #d6bb29;">@Html.DisplayNameFor(model => model.PurchaseDate)</dt>
+        <dd>@Html.DisplayFor(model => model.PurchaseDate)</dd>
+
+        <dt style="color: #d6bb29;">@Html.DisplayNameFor(model => model.TotalAmount)</dt>
+        <dd>@Html.DisplayFor(model => model.TotalAmount)</dd>
+
+        <dt style="color: #d6bb29;">@Html.DisplayNameFor(model => model.TenureMonths)</dt>
+        <dd>@Html.DisplayFor(model => model.TenureMonths)</dd>
+
+        <dt style="color: #d6bb29;">@Html.DisplayNameFor(model => model.MonthlyEMI)</dt>
+        <dd>@Html.DisplayFor(model => model.MonthlyEMI)</dd>
+
+        @*<dt style="color: #d6bb29;">@Html.DisplayNameFor(model => model.RemainingEMI)</dt>
+        <dd>@Html.DisplayFor(model => model.RemainingEMI)</dd>*@
+    </dl>
+</div>
+
+<div style="margin-top: 20px;">
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PurchaseID }, new { @class = "btn btn-success", style = "background-color: #77aded; border: none; border-radius: 5px; padding: 10px 20px; color: white; text-decoration: none;" })
+    |
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-warning", style = "background-color: #d6bb29; border: none; border-radius: 5px; padding: 10px 20px; color: white; text-decoration: none;" })
+</div>

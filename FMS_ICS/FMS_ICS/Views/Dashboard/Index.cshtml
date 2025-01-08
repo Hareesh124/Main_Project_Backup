@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Welcome, @ViewBag.UserName!</h2>
+
+<h3>EMI Card Details</h3>
+<div>
+    <p><strong>Card Number:</strong> @ViewBag.CardNumber</p>
+    <p><strong>Validity:</strong> @ViewBag.Validity</p>
+    <p><strong>Remaining Balance:</strong> @ViewBag.RemainingBalance.ToString("C")</p>
+</div>
+
+<<h3>Products Purchased</h3>
+
+@*<p><strong>Product Name</strong> @ViewBag.Products.ProductID</p>*@
+
+
+@{
+    var productsPurchased = ViewBag.ProductsPurchased as List<FMS_ICS.Models.Purchase>;
+}
+
+@if (productsPurchased != null && productsPurchased.Any())
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Purchase Date</th>
+                <th>Total Amount</th>
+                <th>Tenure (Months)</th>
+                <th>Monthly EMI</th>
+                <th>Remaining EMI</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var purchase in productsPurchased)
+            {
+                <tr>
+                    @if (purchase.Product != null)
+                    {
+                        <td>@purchase.Product.ProductName</td>
+                    }
+                    else
+                    {
+                        <td>Product not available</td>
+                    }
+                    <td>@purchase.PurchaseDate</td>
+                    <td>@purchase.TotalAmount.ToString("C")</td>
+                    <td>@purchase.TenureMonths</td>
+                    <td>@purchase.MonthlyEMI</td>
+                    <td>@purchase.RemainingEMI</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No products purchased.</p>
+}
+
+
+
+<h3>Last Transaction</h3>
+@if (ViewBag.LastTransaction != null)
+{
+    <p><strong>Transaction Date:</strong> @ViewBag.LastTransaction.TransactionDate.ToString("MM/dd/yyyy")</p>
+    <p><strong>Amount Paid:</strong> @ViewBag.LastTransaction.AmountPaid.ToString("C")</p>
+    <p><strong>Remaining Amount:</strong> @ViewBag.LastTransaction.RemainingAmount.ToString("C")</p>
+}
+else
+{
+    <p>No transactions found.</p>
+}
