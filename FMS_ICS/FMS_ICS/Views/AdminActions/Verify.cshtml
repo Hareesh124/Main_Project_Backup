@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Verify User";
+    var user = ViewBag.User;
+    var userCard = ViewBag.UserCard;
+    var documentVerification = ViewBag.DocumentVerification;
+}
+
+<h2>User Verification</h2>
+
+<div>
+    <p><strong>Name:</strong> @user.FullName</p>
+    <p><strong>Email:</strong> @user.Email</p>
+    <p><strong>Phone Number:</strong> @user.PhoneNumber</p>
+    <p><strong>Username:</strong> @user.Username</p>
+    <p><strong>Address:</strong> @user.Address</p>
+
+    <!-- Verify Document -->
+    @using (Html.BeginForm("VerifyDocument", "AdminDashboard", new { id = documentVerification.VerificationID }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Verify Document</button>
+    }
+
+    <!-- Activate Card -->
+    @using (Html.BeginForm("ActivateCard", "AdminDashboard", new { id = userCard.CardID }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Activate Card</button>
+    }
+
+    <!-- Activate User -->
+    @using (Html.BeginForm("ActivateUser", "AdminDashboard", new { id = user.UserID }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-success">Activate User</button>
+    }
+
+    <br />
+    @Html.ActionLink("Back to Pending Users", "Index", null, new { @class = "btn btn-primary" })
+</div>

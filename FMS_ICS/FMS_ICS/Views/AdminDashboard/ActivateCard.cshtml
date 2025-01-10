@@ -1,0 +1,10 @@
+﻿@model FMS_ICS.Models.UserCard
+
+<h2>Activate Card for User: @Model.User.FullName</h2>
+
+<form method="post" action="/AdminDashboard/ActivateCard/@Model.CardTypeID">
+    @Html.AntiForgeryToken()  <!-- Add the anti-forgery token here -->
+
+    <p>Are you sure you want to activate the card for @Model.User.FullName</p>
+    <button type="submit" class="btn btn-success">Deactivate Card</button>
+</form>

@@ -1,0 +1,26 @@
+﻿@model FMS_ICS.Models.DocumentVerification
+
+@{
+    var user = ViewBag.User as FMS_ICS.Models.User;
+    var userCard = ViewBag.UserCard as FMS_ICS.Models.UserCard;
+    var documentVerification = ViewBag.DocumentVerification as FMS_ICS.Models.DocumentVerification;
+}
+
+<h2>Verify Document for @user.FullName</h2>
+
+<form method="post" action="/AdminDashboard/VerifyDocument/@user.UserID">
+    <div class="form-group">
+        <label for="DocumentStatus">Document Status</label>
+        <select id="DocumentStatus" name="documentStatus" class="form-control">
+            <option value="Verified" @(documentVerification?.DocumentStatus == "Verified" ? "selected" : "")>Verified</option>
+            <option value="Rejected" @(documentVerification?.DocumentStatus == "Rejected" ? "selected" : "")>Rejected</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Remarks">Remarks</label>
+        <textarea id="Remarks" name="remarks" class="form-control">@documentVerification?.Remarks</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>

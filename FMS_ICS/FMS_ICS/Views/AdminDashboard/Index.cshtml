@@ -1,0 +1,61 @@
+﻿@{
+    var pendingUsers = ViewBag.PendingUsers as List<FMS_ICS.Models.User>;
+    var userCards = ViewBag.UserCards as List<FMS_ICS.Models.UserCard>;
+    var documentVerifications = ViewBag.DocumentVerifications as List<FMS_ICS.Models.DocumentVerification>;
+}
+
+<h2>Admin Dashboard</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Document Status</th>
+            <th>User Card Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in pendingUsers)
+        {
+            // Get related user card and document verification for each user
+            var userCard = userCards.FirstOrDefault(c => c.UserID == user.UserID);
+            var documentVerification = documentVerifications.FirstOrDefault(d => d.UserID == user.UserID);
+
+            <tr>
+                <td>@user.FullName</td>
+                <td>@user.Email</td>
+                <td>@documentVerification.DocumentStatus</td>
+                <td>@userCard.Status</td>
+                <td>
+                    @if (userCard.Status == "Active")
+                    {
+                        <form method="post" action="/AdminDashboard/DeactivateCard/@userCard.CardID">
+                            <button type="submit" class="btn btn-primary">Deactivate Card</button>
+                        </form>
+                    }
+                    @if (userCard.Status == "Inactive")
+                    {
+                        <form method="post" action="/AdminDashboard/ActivateCard/@userCard.CardID">
+                            <button type="submit" class="btn btn-primary">Activate Card</button>
+                        </form>
+                    }
+                    @if (user.Status == "Pending")
+                    {
+                        <form method="post" action="/AdminDashboard/ActivateUser/@user.UserID">
+                            <button type="submit" class="btn btn-primary">Activate User</button>
+                        </form>
+                    }
+                    @if (documentVerification.DocumentStatus == "Pending")
+                    {
+                        <form method="post" action="/AdminDashboard/VerifyDocument/@user.UserID">
+                            <button type="submit" class="btn btn-primary">Verify Document</button>
+                        </form>
+                    }
+                    @*<a href="/AdminDashboard/VerifyDocument/@user.UserID" class="btn btn-warning">Verify Document</a>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

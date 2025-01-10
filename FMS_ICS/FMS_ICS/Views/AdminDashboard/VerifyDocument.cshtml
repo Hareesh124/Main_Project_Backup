@@ -1,0 +1,17 @@
+﻿@{
+    var pendingUser = ViewBag.User as FMS_ICS.Models.User;
+    var remark = ViewBag.Remarks as FMS_ICS.Models.DocumentVerification;
+    var documentVerifications = ViewBag.DocumentStatus as FMS_ICS.Models.DocumentVerification;
+}
+<h1>Username : @pendingUser.Username</h1>
+<h1>Full Name : @pendingUser.FullName</h1>
+@*<h1>Document Link : @documentVerifications.</h1>*@
+@* Ajay Add Your Web API Get in here *@
+<h1>Remarks : @ViewBag.Remarks</h1>
+<h2>Verify doc for User: @pendingUser.Username</h2>
+
+
+<form method="post" action="/AdminDashboard/VerifyDocument/@pendingUser.UserID">
+    <p>Are you sure you want to verify the User for @pendingUser.Username</p>
+    <button type="submit" class="btn btn-success">Verify</button>
+</form>
