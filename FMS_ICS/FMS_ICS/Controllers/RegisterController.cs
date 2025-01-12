@@ -18,26 +18,27 @@ namespace FMS_ICS.Controllers
             string cardNumber = string.Concat(Enumerable.Range(0, 16).Select(_ => random.Next(0, 10).ToString()));
 
             // Check if the card number is unique in the database
-            while (db.UserCards.Any(c => c.CardNumber == cardNumber))
+            while (_db.UserCards.Any(c => c.CardNumber == cardNumber))
             {
                 cardNumber = string.Concat(Enumerable.Range(0, 16).Select(_ => random.Next(0, 10).ToString()));
             }
 
             return cardNumber;
         }
-        fms_db_icsEntities db = new fms_db_icsEntities();
+        fms_db_icsEntities _db = new fms_db_icsEntities();
 
-        // GET: Register
+
         public ActionResult Index()
         {
-            
-            var cardTypes = db.CardTypes.ToList();
+
+            var cardTypes = _db.CardTypes.ToList();
 
             ViewBag.CardTypes = new SelectList(cardTypes, "CardTypeID", "CardType1");
 
             return View();
-           
+
         }
+
 
         // POST: Register
         [HttpPost]
@@ -49,18 +50,18 @@ namespace FMS_ICS.Controllers
                 if (ModelState.IsValid)
                 {
                     // Check eligibility for the selected card type
-                    var cardType = db.CardTypes.FirstOrDefault(c => c.CardTypeID == selectedCardType);
+                    var cardType = _db.CardTypes.FirstOrDefault(c => c.CardTypeID == selectedCardType);
                     if (cardType == null)
                     {
                         ModelState.AddModelError("selectedCardType", "Invalid card type selected.");
                         throw new Exception("Invalid card type.");
                     }
 
-                   // Save user details in the database
+                    // Save user details in the database
                     user.RegistrationDate = DateTime.Now;
                     user.Status = "Pending";
-                    db.Users.Add(user);
-                    db.SaveChanges();
+                    _db.Users.Add(user);
+                    _db.SaveChanges();
 
                     // Create user card entry
                     var userCard = new UserCard
@@ -72,8 +73,8 @@ namespace FMS_ICS.Controllers
                         Validity = DateTime.Now.AddYears(5), // Set validity period
                         Status = "Inactive"
                     };
-                    db.UserCards.Add(userCard);
-                    db.SaveChanges();
+                    _db.UserCards.Add(userCard);
+                    _db.SaveChanges();
 
                     // Create document verification entry
                     var documentVerification = new DocumentVerification
@@ -83,11 +84,11 @@ namespace FMS_ICS.Controllers
                         DocumentStatus = "Pending",
                         Remarks = "Awaiting Verification"
                     };
-                    db.DocumentVerifications.Add(documentVerification);
-                    db.SaveChanges();
+                    _db.DocumentVerifications.Add(documentVerification);
+                    _db.SaveChanges();
 
-                    // Redirect to success page
-                    return RedirectToAction("Success");
+                    // Redirect to User Dashboard
+                    //return RedirectToAction("Success");
                 }
             }
             catch (Exception ex)
@@ -96,8 +97,7 @@ namespace FMS_ICS.Controllers
                 System.Diagnostics.Debug.WriteLine("Error in registration: " + ex.Message);
             }
 
-            // Repopulate card types dropdown in case of an error
-            ViewBag.CardTypes = new SelectList(db.CardTypes, "CardTypeID", "CardType1");
+            ViewBag.CardTypes = new SelectList(_db.CardTypes, "CardTypeID", "CardType1");
             return View(user);
         }
 

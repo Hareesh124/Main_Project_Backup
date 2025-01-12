@@ -3,6 +3,7 @@
 <head>
     <title>Register - Finance Management System</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    
     <style>
         body {
             background-color: #f8f9fa;
@@ -91,9 +92,9 @@
             transition: all 0.3s ease;
         }
 
-        .btn-outline-primary:hover {
-            background-color: #4a90e2;
-            color: white;
+            .btn-outline-primary:hover {
+                background-color: #4a90e2;
+                color: white;
             }
 
         .text-danger {
@@ -101,7 +102,6 @@
             margin-top: 0.25rem;
         }
 
-        /* Card type specific styles */
         .text-warning {
             color: #ffd700 !important;
         }
@@ -166,161 +166,124 @@
                 <!-- Registration Form -->
                 <div class="card">
                     @*<div class="card-header">
-                        <h4 class="mb-0">Register for New Card</h4>
-                    </div>*@
+                            <h4 class="mb-0">Register for New Card</h4>
+                        </div>*@
                     <div class="card-body p-4">
                         @using (Html.BeginForm("Register", "Register", FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true, "", new { @class = "text-danger mb-4" })
 
-                        <div class="container mt-5">
-                            <div class="row justify-content-center">
-                                <div class="col-md-8">
-                                    <!-- Navigation Links -->
-                                    @*<div class="text-center mb-4">
-                                        <h2>Finance Management System</h2>
-                                        <p>
-                                            Already have an account?
-                                            <a href="@Url.Action("Index", "Login")" class="btn btn-outline-primary">Login Here</a>
-                                        </p>
-                                    </div>*@
-
-                                    <!-- Card Options -->
-                                    @*<div class="row mb-4">
-                                        <div class="col-md-6">
-                                            <div class="card bg-light">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-warning">Gold Card</h5>
-                                                    <ul class="list-unstyled">
-                                                        <li>Credit Limit: ₹50,000</li>
-                                                        <li>Joining Fee: ₹500</li>
-                                                        <li>Ideal for everyday purchases</li>
-                                                    </ul>
-                                                </div>
+                            <div class="container mt-5">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-8">                                     
+                                        <!-- Registration Form -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4 class="mb-0">Register for New Card</h4>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card bg-light">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-info">Titanium Card</h5>
-                                                    <ul class="list-unstyled">
-                                                        <li>Credit Limit: ₹100,000</li>
-                                                        <li>Joining Fee: ₹1,000</li>
-                                                        <li>Premium benefits & rewards</li>
-                                                    </ul>
-                                                </div>
+                                            <div class="card-body">
+                                                @using (Html.BeginForm("Register", "Register", FormMethod.Post))
+                                                {
+                                                    @*@Html.AntiForgeryToken()*@
+                                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group mb-3">
+                                                                @Html.LabelFor(m => m.FullName, "Full Name")
+                                                                @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                                                                @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group mb-3">
+                                                                @Html.LabelFor(m => m.PhoneNumber, "Phone Number")
+                                                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                                                                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group mb-3">
+                                                        @Html.LabelFor(m => m.Email, "Email")
+                                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group mb-3">
+                                                                @Html.LabelFor(m => m.Username, "Username")
+                                                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                                                                @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group mb-3">
+                                                                @Html.LabelFor(m => m.Password, "Password")
+                                                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group mb-3">
+                                                        <label>Confirm Password</label>
+                                                        <input type="password" name="ConfirmPassword" class="form-control" required />
+                                                    </div>
+
+                                                    <div class="form-group mb-3">
+                                                        @Html.LabelFor(m => m.Address, "Address")
+                                                        @Html.TextAreaFor(m => m.Address, new { @class = "form-control", rows = "3" })
+                                                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group mb-3">
+                                                                <label>Card Type</label>
+                                                                @Html.DropDownList("selectedCardType", (SelectList)ViewBag.CardTypes, "Select Card Type", new { @class = "form-control" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group mb-3">
+                                                                <label>Bank Name</label>
+                                                                <select class="form-control" name="BankName" required>
+                                                                    <option value="">Select Bank</option>
+                                                                    <option value="SBI">State Bank of India</option>
+                                                                    <option value="HDFC">HDFC Bank</option>
+                                                                    <option value="ICICI">ICICI Bank</option>
+                                                                    <option value="Axis">Axis Bank</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group mb-3">
+                                                                <label>Savings Account Number</label>
+                                                                <input type="text" name="AccountNumber" class="form-control" required />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group mb-3">
+                                                                <label>IFSC Code</label>
+                                                                <input type="text" name="IFSCCode" class="form-control" required />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="d-grid">
+                                                        <button type="submit" class="btn btn-primary">Register</button>
+                                                    </div>
+                                                }
                                             </div>
-                                        </div>
-                                    </div>*@
-
-                                    <!-- Registration Form -->
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h4 class="mb-0">Register for New Card</h4>
-                                        </div>
-                                        <div class="card-body">
-                                            @using (Html.BeginForm("Register", "Register", FormMethod.Post))
-                                            {
-                                                @*@Html.AntiForgeryToken()*@
-                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mb-3">
-                                                            @Html.LabelFor(m => m.FullName, "Full Name")
-                                                            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
-                                                            @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mb-3">
-                                                            @Html.LabelFor(m => m.PhoneNumber, "Phone Number")
-                                                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
-                                                            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group mb-3">
-                                                    @Html.LabelFor(m => m.Email, "Email")
-                                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mb-3">
-                                                            @Html.LabelFor(m => m.Username, "Username")
-                                                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
-                                                            @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mb-3">
-                                                            @Html.LabelFor(m => m.Password, "Password")
-                                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group mb-3">
-                                                    <label>Confirm Password</label>
-                                                    <input type="password" name="ConfirmPassword" class="form-control" required />
-                                                </div>
-
-                                                <div class="form-group mb-3">
-                                                    @Html.LabelFor(m => m.Address, "Address")
-                                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", rows = "3" })
-                                                    @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mb-3">
-                                                            <label>Card Type</label>
-                                                            @Html.DropDownList("selectedCardType", (SelectList)ViewBag.CardTypes, "Select Card Type", new { @class = "form-control" })
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mb-3">
-                                                            <label>Bank Name</label>
-                                                            <select class="form-control" name="BankName" required>
-                                                                <option value="">Select Bank</option>
-                                                                <option value="SBI">State Bank of India</option>
-                                                                <option value="HDFC">HDFC Bank</option>
-                                                                <option value="ICICI">ICICI Bank</option>
-                                                                <option value="Axis">Axis Bank</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mb-3">
-                                                            <label>Savings Account Number</label>
-                                                            <input type="text" name="AccountNumber" class="form-control" required />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group mb-3">
-                                                            <label>IFSC Code</label>
-                                                            <input type="text" name="IFSCCode" class="form-control" required />
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="d-grid">
-                                                    <button type="submit" class="btn btn-primary">Register</button>
-                                                </div>
-                                            }
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         }
                     </div>
                 </div>
@@ -328,6 +291,96 @@
         </div>
     </div>
 
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+
+            form.addEventListener("submit", function (event) {
+                let isValid = true;
+
+                // Full Name Validation
+                const fullName = form.querySelector("input[name='FullName']");
+                if (!fullName.value.trim()) {
+                    isValid = false;
+                    alert("Full Name is required.");
+                }
+
+                // Phone Number Validation (10-digit number)
+                const phoneNumber = form.querySelector("input[name='PhoneNumber']");
+                if (!/^\d{10}$/.test(phoneNumber.value.trim())) {
+                    isValid = false;
+                    alert("Phone Number must be a 10-digit number.");
+                }
+
+                // Email Validation
+                const email = form.querySelector("input[name='Email']");
+                if (!/^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/.test(email.value.trim())) {
+                    isValid = false;
+                    alert("Please enter a valid email address.");
+                }
+
+                // Username Validation
+                const username = form.querySelector("input[name='Username']");
+                if (!username.value.trim()) {
+                    isValid = false;
+                    alert("Username is required.");
+                }
+
+                // Password Validation
+                const password = form.querySelector("input[name='Password']");
+                const confirmPassword = form.querySelector("input[name='ConfirmPassword']");
+                if (!password.value.trim()) {
+                    isValid = false;
+                    alert("Password is required.");
+                } else if (password.value !== confirmPassword.value) {
+                    isValid = false;
+                    alert("Passwords do not match.");
+                }
+
+                // Address Validation
+                const address = form.querySelector("textarea[name='Address']");
+                if (!address.value.trim()) {
+                    isValid = false;
+                    alert("Address is required.");
+                }
+
+                // Card Type Validation
+                const cardType = form.querySelector("select[name='selectedCardType']");
+                if (!cardType.value.trim()) {
+                    isValid = false;
+                    alert("Please select a card type.");
+                }
+
+                // Bank Name Validation
+                const bankName = form.querySelector("select[name='BankName']");
+                if (!bankName.value.trim()) {
+                    isValid = false;
+                    alert("Please select a bank name.");
+                }
+
+                // Account Number Validation (Numeric only)
+                const accountNumber = form.querySelector("input[name='AccountNumber']");
+                if (!/^\d+$/.test(accountNumber.value.trim())) {
+                    isValid = false;
+                    alert("Savings Account Number must be numeric.");
+                }
+
+                // IFSC Code Validation
+                const ifscCode = form.querySelector("input[name='IFSCCode']");
+                if (!/^[A-Za-z]{4}\d{7}$/.test(ifscCode.value.trim())) {
+                    isValid = false;
+                    alert("Please enter a valid IFSC Code (4 letters followed by 7 digits).");
+                }
+
+                // Prevent form submission if validation fails
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
     @Scripts.Render("~/bundles/jqueryval")
